@@ -1,0 +1,98 @@
+{
+  "program": "Polkadot / ParaSpell \u2014 xcm-tools Cash Bug Bounty Program",
+  "guidelines_url": "https://paraspell.github.io/docs/contribution-guidelines.html",
+  "repository_url": "https://github.com/paraspell/xcm-tools",
+  "reward_structure_cash": "Report bugs: $5-$70 USD | Fix bugs: $5-$250+ USD per issue (Polkadot AssetHub payout)",
+  "open_zero_comment_issues_fixed": 6,
+  "new_zero_day_bugs_discovered": 2,
+  "verified_items": [
+    {
+      "id": "ISSUE-2279",
+      "title": "[Bug bounty] Fee-asset origin fee is PAPI-only: Dedot and PJS under-report it (250n vs 1000n)",
+      "url": "https://github.com/paraspell/xcm-tools/issues/2279",
+      "comments": 0,
+      "unpatched_fee_plancks": 250,
+      "patched_fee_plancks": 1000,
+      "verified": true
+    },
+    {
+      "id": "ISSUE-2278",
+      "title": "[Bug bounty] Acala amountOut is inflated by 10 percent: the fee buffer is applied to the net receipt instead of the fee",
+      "url": "https://github.com/paraspell/xcm-tools/issues/2278",
+      "comments": 0,
+      "unpatched_amount_out": "46199999999998",
+      "patched_amount_out": "41999999999999",
+      "verified": true
+    },
+    {
+      "id": "ISSUE-2277",
+      "title": "[Bug bounty] validateTransact returns the sender/recipient error instead of throwing, so the guard never runs",
+      "url": "https://github.com/paraspell/xcm-tools/issues/2277",
+      "comments": 0,
+      "unpatched_throws": false,
+      "patched_throws": true,
+      "verified": true
+    },
+    {
+      "id": "ISSUES-2276-AND-2275",
+      "title": "[Bug bounty] Dedot & PAPI transform() mangle string numeric currency_id in multi-key objects",
+      "urls": [
+        "https://github.com/paraspell/xcm-tools/issues/2276",
+        "https://github.com/paraspell/xcm-tools/issues/2275"
+      ],
+      "comments": 0,
+      "unpatched_currency_id": {
+        "type": "123"
+      },
+      "patched_currency_id": 123,
+      "verified": true
+    },
+    {
+      "id": "ISSUE-2274",
+      "title": "[Bug bounty] Dedot getBridgeStatus returns a raw enum object, so every Snowbridge transfer throws BridgeHaltedError",
+      "url": "https://github.com/paraspell/xcm-tools/issues/2274",
+      "comments": 0,
+      "unpatched_equal_normal": false,
+      "patched_equal_normal": true,
+      "verified": true
+    },
+    {
+      "id": "PS-NEW-01",
+      "title": "[New Bug Bounty Report + Fix] BifrostExchange swapCurrency crashes with RangeError (non-integer / NaN BigInt) on decimal slippagePct ('0.14', '0.29', '0.58', '1.15') or omitted slippagePct",
+      "file": "packages/swap/src/exchanges/Bifrost/BifrostExchange.ts:72",
+      "reproduced_cases": [
+        {
+          "slippagePct": "0.14",
+          "float_product": "14.000000000000002",
+          "patched_round": 14
+        },
+        {
+          "slippagePct": "0.29",
+          "float_product": "28.999999999999996",
+          "patched_round": 29
+        },
+        {
+          "slippagePct": "0.58",
+          "float_product": "57.99999999999999",
+          "patched_round": 58
+        },
+        {
+          "slippagePct": "1.15",
+          "float_product": "114.99999999999999",
+          "patched_round": 115
+        }
+      ],
+      "verified": true
+    },
+    {
+      "id": "PS-NEW-02",
+      "title": "[New Bug Bounty Report + Fix] AcalaExchange swapCurrency returns negative amountOut instead of throwing AmountTooLowError when native output is smaller than destination fee",
+      "file": "packages/swap/src/exchanges/Acala/AcalaExchange.ts:114-117",
+      "unpatched_net_amount_out": -200,
+      "patched_throws_amount_too_low_error": true,
+      "verified": true
+    }
+  ],
+  "verification_status": "PASSED_ALL_8_PARASPELL_XCM_BOUNTY_PROOFS",
+  "sha256": "3011e4068b54105f6744dcacb2c5f0bfa9e231bc81289dadc21f2ef20b25ae8f"
+}
